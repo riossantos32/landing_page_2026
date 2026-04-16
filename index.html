@@ -48,6 +48,14 @@
   gtag('config', 'G-FRDV5LBYW8');
 </script>
 
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wcqtip2i9n");
+</script>
+
 
 <body class="font-sans text-gray-800 bg-gray-50 antialiased selection:bg-primary selection:text-white overflow-x-hidden">
 
@@ -92,6 +100,50 @@
                 <h4 class="font-bold text-sm text-dark">💡 Equipo: Nota sobre UX/UI</h4>
                 <p class="text-xs text-gray-600 mt-1">Hagan scroll. ¿Notan cómo los elementos aparecen suavemente (fade-in)? ¿Y cómo los botones reaccionan al ratón? <strong>La animación no es para "adornar", es para guiar el ojo y reducir la fricción.</strong> No abusen de ellas o bajarán sus conversiones.</p>
                 <button onclick="document.getElementById('ux-toast').style.display='none'" class="text-xs text-gray-400 hover:text-gray-800 mt-2 underline">Entendido</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTÓN DE CHATBOT -->
+    <div class="fixed bottom-20 right-4 z-50" id="chatbot-button">
+        <button onclick="toggleChat()" class="bg-primary text-white p-4 rounded-full shadow-lg hover:bg-indigo-700 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+            <i data-lucide="message-circle" class="w-6 h-6 group-hover:scale-110 transition-transform"></i>
+        </button>
+    </div>
+
+    <!-- MODAL DEL CHATBOT -->
+    <div class="fixed bottom-24 right-4 z-50 w-80 h-96 bg-white rounded-2xl shadow-2xl border border-gray-200 hidden" id="chatbot-modal">
+        <div class="flex flex-col h-full">
+            <!-- Header del Chat -->
+            <div class="bg-primary text-white p-4 rounded-t-2xl flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="bot" class="w-5 h-5"></i>
+                    <span class="font-semibold">Asistente InterMarket</span>
+                </div>
+                <button onclick="toggleChat()" class="hover:bg-indigo-700 p-1 rounded-full transition-colors">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            
+            <!-- Área de Mensajes -->
+            <div class="flex-1 p-4 overflow-y-auto bg-gray-50" id="chat-messages">
+                <div class="bg-white p-3 rounded-lg shadow-sm mb-3 max-w-xs">
+                    <p class="text-sm text-gray-800">¡Hola! Soy el asistente de InterMarket. ¿En qué puedo ayudarte sobre nuestra app?</p>
+                </div>
+            </div>
+            
+            <!-- Área de Input -->
+            <div class="p-4 border-t border-gray-200 bg-white rounded-b-2xl">
+                <div class="flex gap-2">
+                    <input type="text" id="chat-input" placeholder="Escribe tu pregunta..." class="flex-1 px-3 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" onkeypress="handleKeyPress(event)">
+                    <button onclick="sendMessage()" class="bg-primary text-white p-2 rounded-full hover:bg-indigo-700 transition-colors">
+                        <i data-lucide="send" class="w-4 h-4"></i>
+                    </button>
+                </div>
+                <div class="mt-2 text-xs text-gray-500 text-center">
+                    <i data-lucide="bot" class="w-3 h-3 inline mr-1"></i>
+                    Potenciado por Gemini AI - Pregunta sobre InterMarket
+                </div>
             </div>
         </div>
     </div>
@@ -582,6 +634,171 @@
         document.querySelectorAll('.animate-on-scroll, .animate-on-scroll-line').forEach((el) => {
             observer.observe(el);
         });
+
+        // Funcionalidad del Chatbot con Gemini API
+        // IMPORTANTE: Reemplaza 'TU_API_KEY_DE_GEMINI_AQUI' con tu API key real de Google AI Studio
+        // Obtén tu API key en: https://makersuite.google.com/app/apikey
+        const API_KEY = 'AIzaSyAdaEQJmfetQYlt8cxIKoPSabVS7NKdkHo'; // ⚠️ NO uses esta key en producción - es inseguro
+
+        function toggleChat() {
+            const modal = document.getElementById('chatbot-modal');
+            const button = document.getElementById('chatbot-button');
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                button.style.display = 'none';
+            } else {
+                modal.classList.add('hidden');
+                button.style.display = 'block';
+            }
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            if (message === '') return;
+            
+            addMessage(message, 'user');
+            input.value = '';
+            
+            // Mostrar indicador de escritura
+            addTypingIndicator();
+            
+            try {
+                const response = await getGeminiResponse(message);
+                removeTypingIndicator();
+                addMessage(response, 'bot');
+            } catch (error) {
+                removeTypingIndicator();
+                addMessage('Lo siento, hubo un error al procesar tu mensaje. Por favor, intenta de nuevo.', 'bot');
+                console.error('Error con Gemini API:', error);
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function addMessage(text, sender) {
+            const messagesContainer = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = sender === 'user' ? 'bg-primary text-white p-3 rounded-lg shadow-sm mb-3 ml-auto max-w-xs' : 'bg-white p-3 rounded-lg shadow-sm mb-3 max-w-xs';
+            messageDiv.innerHTML = `<p class="text-sm">${text}</p>`;
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function addTypingIndicator() {
+            const messagesContainer = document.getElementById('chat-messages');
+            const typingDiv = document.createElement('div');
+            typingDiv.id = 'typing-indicator';
+            typingDiv.className = 'bg-white p-3 rounded-lg shadow-sm mb-3 max-w-xs';
+            typingDiv.innerHTML = `
+                <div class="flex items-center gap-2">
+                    <div class="flex gap-1">
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                    </div>
+                    <span class="text-sm text-gray-500">Escribiendo...</span>
+                </div>
+            `;
+            messagesContainer.appendChild(typingDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const typingDiv = document.getElementById('typing-indicator');
+            if (typingDiv) {
+                typingDiv.remove();
+            }
+        }
+
+        async function getGeminiResponse(message) {
+            console.log('API Key:', API_KEY);
+            if (!API_KEY || API_KEY === 'AIzaSyAdaEQJmfetQYlt8cxIKoPSabVS7NKdkHo') {
+                return 'Lo siento, el chatbot no está configurado correctamente. Por favor, contacta al administrador.';
+            }
+
+            const prompt = `Eres un asistente de InterMarket, una aplicación de comercio electrónico para Pymes locales desarrollada por estudiantes de Ingeniería en Sistemas de Información de la UNA Nicaragua. 
+
+La app permite:
+- Registro y autenticación de usuarios (compradores y vendedores)
+- Gestión de catálogos de productos con fotos, descripciones y precios
+- Búsqueda y comparación de productos con filtros
+- Chat directo entre compradores y vendedores
+- Pagos seguros en línea
+- Desarrollada con React Native y Supabase
+
+Responde de manera amable, útil y en español. Mantén las respuestas concisas pero informativas. Si la pregunta no está relacionada con InterMarket, redirígela amablemente hacia temas de la app.
+
+Pregunta del usuario: ${message}`;
+
+            console.log('Enviando prompt a Gemini:', prompt);
+            
+            try {
+                // Usar REST API en lugar del SDK para evitar problemas de CORS
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: prompt
+                            }]
+                        }]
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log('Respuesta de Gemini API:', data);
+                
+                if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0]) {
+                    return data.candidates[0].content.parts[0].text;
+                } else {
+                    throw new Error('Respuesta inesperada de la API');
+                }
+            } catch (error) {
+                console.error('Error calling Gemini API:', error);
+                // Fallback a respuestas predefinidas si la API falla
+                return getFallbackResponse(message);
+            }
+        }
+
+        function getFallbackResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            // Base de conocimientos del chatbot
+            const responses = {
+                registro: "Para registrarte en InterMarket, descarga la app desde la Play Store o App Store, selecciona si eres comprador o vendedor, y crea tu cuenta con tu email y contraseña. ¡Es gratis!",
+                productos: "Como vendedor, puedes agregar productos con fotos, descripciones, precios y categorías. Los compradores pueden buscar, filtrar y comparar productos de diferentes vendedores locales.",
+                busqueda: "Nuestra app tiene un potente sistema de búsqueda con filtros por categoría, precio, ubicación y más. Puedes buscar productos específicos o explorar por categorías.",
+                pagos: "Aceptamos pagos seguros a través de tarjetas de crédito, débito y transferencias bancarias. Todas las transacciones están protegidas con encriptación SSL.",
+                seguridad: "Tu seguridad es nuestra prioridad. Usamos encriptación de datos, autenticación segura y cumplimos con las normativas de protección de datos. Nunca compartimos tu información personal.",
+                chat: "Dentro de la app, puedes chatear directamente con vendedores para hacer preguntas sobre productos, negociar precios o coordinar entregas.",
+                local: "InterMarket está diseñado específicamente para el comercio local entre Pymes. Conecta compradores y vendedores de tu comunidad para transacciones más rápidas y seguras.",
+                gratis: "La versión beta es completamente gratuita. En el futuro, planeamos un modelo freemium con funciones premium para vendedores.",
+                app: "InterMarket es una app híbrida desarrollada con React Native, disponible para iOS y Android. También tenemos una versión web en desarrollo.",
+                equipo: "Somos estudiantes de Ingeniería en Sistemas de Información de la UNA Nicaragua, apasionados por crear soluciones tecnológicas para el comercio local.",
+                default: "Lo siento, no entendí tu pregunta. Puedes preguntarme sobre registro, productos, búsqueda, pagos, seguridad, chat, comercio local, o cualquier otra función de InterMarket."
+            };
+            
+            // Buscar coincidencias por palabras clave
+            for (const [key, response] of Object.entries(responses)) {
+                if (lowerMessage.includes(key)) {
+                    return response;
+                }
+            }
+            
+            return responses.default;
+        }
     </script>
 </body>
 </html>
