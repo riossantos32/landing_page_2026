@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="VOY98AUhY3kuBiTLKeaKAaly3Vbh0Rw9bNR-5DdZa5I" />
-    <title>InterMarket - Plataforma de Comercio Electrónico para Pymes Locales</title>
+    <title>InterMarket - Comercio local fácil, rápido y seguro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
@@ -12,28 +12,80 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#4F46E5', // Indigo 600
-                        secondary: '#10B981', // Emerald 500
-                        dark: '#111827',
+                        primary: '#2563eb', // Royal Blue 600
+                        secondary: '#f59e0b', // Amber 500
+                        dark: '#111827', // Gray 900
+                        darker: '#030712', // Gray 950
+                        accent: '#ef4444', // Red 500
+                        slate: {
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
                     },
                     animation: {
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
                     }
                 }
             }
         }
     </script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+        
+        body {
+            font-family: 'Plus+Jakarta+Sans', sans-serif;
+        }
+        
+        .font-mono {
+            font-family: 'JetBrains+Mono', monospace;
+        }
+
         /* Custom styles for the accordion */
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
         
-        /* Efectos de glassmorfismo sutiles */
+        /* Efectos de glassmorfismo robustos */
         .glass-effect {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(3, 7, 18, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .card-gradient {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.4) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-gradient:hover {
+            border-color: rgba(37, 99, 235, 0.5);
+            box-shadow: 0 10px 30px -10px rgba(37, 99, 235, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #3b82f6, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
         }
     </style>
 </head>
@@ -57,210 +109,274 @@
 </script>
 
 
-<body class="font-sans text-gray-800 bg-gray-50 antialiased selection:bg-primary selection:text-white overflow-x-hidden">
+<body class="text-slate-300 bg-darker antialiased selection:bg-primary/30 selection:text-white overflow-x-hidden">
 
     <!-- SECCIÓN 1: Navegación -->
-    <header class="fixed w-full glass-effect shadow-sm z-50 transition-all duration-500 transform translate-y-0" id="main-header">
+    <header class="fixed w-full glass-effect z-50 transition-all duration-500" id="main-header">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
+            <div class="flex justify-between items-center h-20">
                 <div class="flex-shrink-0 flex items-center gap-3 group cursor-pointer">
-                    <div class="w-12 h-12 rounded-full bg-primary/20 border border-primary/30 shadow-sm flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover:scale-105">
-                        <img src="icono_intermarket-removebg-preview.png" alt="Logo InterMarket" class="w-30 h-30 object-contain">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent p-0.5 shadow-lg shadow-primary/20 transition-transform duration-300 group-hover:scale-110">
+                        <div class="w-full h-full bg-darker rounded-[10px] flex items-center justify-center overflow-hidden">
+                            <img src="icono_intermarket-removebg-preview.png" alt="Logo InterMarket" class="w-8 h-8 object-contain">
+                        </div>
                     </div>
-                    <span class="font-bold text-xl tracking-tight text-dark group-hover:text-primary transition-colors duration-300">InterMarket</span>
+                    <span class="font-bold text-2xl tracking-tight text-white">InterMarket</span>
                 </div>
-                <nav class="hidden md:flex space-x-8">
-                    <a href="#problema" class="relative text-gray-600 hover:text-primary transition-colors text-sm font-medium group">
-                        El Problema
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="#solucion" class="relative text-gray-600 hover:text-primary transition-colors text-sm font-medium group">
-                        Beneficios
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="#faq" class="relative text-gray-600 hover:text-primary transition-colors text-sm font-medium group">
-                        FAQ
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                    </a>
+                <nav class="hidden md:flex space-x-10">
+                    <a href="#problema" class="text-slate-400 hover:text-white transition-colors text-sm font-medium">El Problema</a>
+                    <a href="#solucion" class="text-slate-400 hover:text-white transition-colors text-sm font-medium">Solución</a>
+                    <a href="#pasos" class="text-slate-400 hover:text-white transition-colors text-sm font-medium">Cómo funciona</a>
+                    <a href="#faq" class="text-slate-400 hover:text-white transition-colors text-sm font-medium">FAQ</a>
                 </nav>
-                <div class="flex items-center">
-                    <a href="#cta-final" class="bg-primary text-white px-5 py-2 rounded-full font-medium hover:bg-indigo-700 hover:shadow-lg hover:-translate-y-0.5 transform transition-all duration-300 text-sm">
-                        Únanse a la Beta
+                <div class="flex items-center gap-4">
+                    <a href="#cta-final" class="hidden sm:inline-flex bg-primary text-white px-6 py-2.5 rounded-xl font-bold hover:bg-primary/90 transition-all duration-300 text-sm shadow-lg shadow-primary/20">
+                        Acceso Beta
                     </a>
+                    <!-- Mobile Menu Button -->
+                    <button class="md:hidden text-slate-400 hover:text-white">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- NOTA EDUCATIVA PARA ESTUDIANTES SOBRE UX/UI -->
-    <div class="fixed bottom-4 right-4 z-50 max-w-sm bg-white p-4 rounded-xl shadow-2xl border-l-4 border-secondary animate-bounce-slow" id="ux-toast" style="animation: bounce 2s infinite;">
-        <div class="flex items-start gap-3">
-            <i data-lucide="lightbulb" class="text-secondary w-6 h-6 flex-shrink-0 mt-1"></i>
-            <div>
-                <h4 class="font-bold text-sm text-dark">💡 Equipo: Nota sobre UX/UI</h4>
-                <p class="text-xs text-gray-600 mt-1">Hagan scroll. ¿Notan cómo los elementos aparecen suavemente (fade-in)? ¿Y cómo los botones reaccionan al ratón? <strong>La animación no es para "adornar", es para guiar el ojo y reducir la fricción.</strong> No abusen de ellas o bajarán sus conversiones.</p>
-                <button onclick="document.getElementById('ux-toast').style.display='none'" class="text-xs text-gray-400 hover:text-gray-800 mt-2 underline">Entendido</button>
-            </div>
-        </div>
-    </div>
-
     <!-- BOTÓN DE CHATBOT -->
     <div class="fixed bottom-20 right-4 z-50" id="chatbot-button">
-        <button onclick="toggleChat()" class="bg-primary text-white p-4 rounded-full shadow-lg hover:bg-indigo-700 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+        <button onclick="toggleChat()" class="bg-primary text-white p-4 rounded-full shadow-lg hover:bg-[#c63da2] hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
             <i data-lucide="message-circle" class="w-6 h-6 group-hover:scale-110 transition-transform"></i>
         </button>
     </div>
 
     <!-- MODAL DEL CHATBOT -->
-    <div class="fixed bottom-24 right-4 z-50 w-80 h-96 bg-white rounded-2xl shadow-2xl border border-gray-200 hidden" id="chatbot-modal">
-        <div class="flex flex-col h-full">
-            <!-- Header del Chat -->
-            <div class="bg-primary text-white p-4 rounded-t-2xl flex justify-between items-center">
-                <div class="flex items-center gap-2">
-                    <i data-lucide="bot" class="w-5 h-5"></i>
-                    <span class="font-semibold">Asistente InterMarket</span>
+    <div class="fixed bottom-24 right-4 z-50 w-80 h-[28rem] bg-dark border border-slate-700 rounded-2xl shadow-2xl hidden flex-col overflow-hidden" id="chatbot-modal">
+        <!-- Header del Chat -->
+        <div class="bg-slate-800 p-4 flex justify-between items-center border-b border-slate-700">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
+                    <i data-lucide="bot" class="w-5 h-5 text-primary"></i>
                 </div>
-                <button onclick="toggleChat()" class="hover:bg-indigo-700 p-1 rounded-full transition-colors">
-                    <i data-lucide="x" class="w-5 h-5"></i>
+                <div>
+                    <span class="font-bold text-white text-sm block">Asistente InterMarket</span>
+                    <span class="text-[10px] text-secondary flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 bg-secondary rounded-full animate-pulse"></span>
+                        En línea ahora
+                    </span>
+                </div>
+            </div>
+            <button onclick="toggleChat()" class="text-slate-400 hover:text-white transition-colors">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+        
+        <!-- Área de Mensajes -->
+        <div class="flex-1 p-4 overflow-y-auto space-y-4 bg-darker/50" id="chat-messages">
+            <div class="bg-slate-800 p-3 rounded-2xl rounded-tl-none border border-slate-700 max-w-[85%]">
+                <p class="text-xs text-slate-300 leading-relaxed">¡Hola! Soy tu asistente de InterMarket. ¿En qué puedo ayudarte hoy?</p>
+            </div>
+        </div>
+        
+        <!-- Área de Input -->
+        <div class="p-4 bg-slate-800/50 border-t border-slate-700">
+            <div class="flex gap-2 mb-3">
+                <input type="text" id="chat-input" placeholder="Escribe tu pregunta..." class="flex-1 bg-darker border border-slate-700 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-primary transition-colors" onkeypress="handleKeyPress(event)">
+                <button onclick="sendMessage()" class="bg-primary text-white p-2 rounded-xl hover:bg-primary/80 transition-colors">
+                    <i data-lucide="send" class="w-4 h-4"></i>
                 </button>
             </div>
-            
-            <!-- Área de Mensajes -->
-            <div class="flex-1 p-4 overflow-y-auto bg-gray-50" id="chat-messages">
-                <div class="bg-white p-3 rounded-lg shadow-sm mb-3 max-w-xs">
-                    <p class="text-sm text-gray-800">¡Hola! Soy el asistente de InterMarket. ¿En qué puedo ayudarte sobre nuestra app?</p>
-                </div>
-            </div>
-            
-            <!-- Área de Input -->
-            <div class="p-4 border-t border-gray-200 bg-white rounded-b-2xl">
-                <div class="flex gap-2">
-                    <input type="text" id="chat-input" placeholder="Escribe tu pregunta..." class="flex-1 px-3 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" onkeypress="handleKeyPress(event)">
-                    <button onclick="sendMessage()" class="bg-primary text-white p-2 rounded-full hover:bg-indigo-700 transition-colors">
-                        <i data-lucide="send" class="w-4 h-4"></i>
-                    </button>
-                </div>
-                <div class="mt-2 text-xs text-gray-500 text-center">
-                    <i data-lucide="bot" class="w-3 h-3 inline mr-1"></i>
-                    Potenciado por Gemini AI - Pregunta sobre InterMarket
-                </div>
+            <div class="flex flex-wrap gap-2">
+                <button class="chat-suggestion text-[10px] px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-400 hover:border-primary hover:text-white transition-all" data-question="¿Cómo me registro?">Registro</button>
+                <button class="chat-suggestion text-[10px] px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-400 hover:border-primary hover:text-white transition-all" data-question="¿Cómo funciona el catálogo?">Catálogo</button>
+                <button class="chat-suggestion text-[10px] px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-400 hover:border-primary hover:text-white transition-all" data-question="¿Qué métodos de pago hay?">Pagos</button>
             </div>
         </div>
     </div>
 
-    <!-- SECCIÓN 2: Hero Section (La más crítica) -->
-    <section class="pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+    <!-- SECCIÓN 2: Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- Background elements -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10">
+            <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px] animate-pulse-slow"></div>
+            <div class="absolute bottom-[10%] right-[-5%] w-[30%] h-[30%] bg-secondary/10 rounded-full blur-[100px] animate-pulse-slow" style="animation-delay: 2s"></div>
+        </div>
+
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div class="text-center lg:text-left z-10 animate-on-scroll">
-                    <div class="inline-block bg-indigo-100 text-primary px-3 py-1 rounded-full text-sm font-semibold mb-6 tracking-wide hover:bg-indigo-200 transition-colors cursor-default">
-                        � Proyecto de Ingeniería en Sistemas de Información 2026
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="text-center lg:text-left animate-on-scroll">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono font-medium mb-8">
+                        <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                        </span>
+                        PROYECTO INTERMARKET 2026
                     </div>
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-dark leading-tight mb-6 tracking-tight">
-                        InterMarket: Conecta Compradores y Vendedores en un Solo Lugar <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">para Pymes Locales</span>.
+                    <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-[1.1] mb-8 tracking-tight">
+                        Conecta tu negocio con el <span class="text-gradient">mundo local</span> de forma inteligente.
                     </h1>
-                    <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto lg:mx-0">
-                        Descubre una aplicación híbrida que facilita el comercio electrónico entre compradores y vendedores locales. Gestiona catálogos de productos, compara precios y realiza transacciones seguras con React Native y Supabase.
+                    <p class="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        La plataforma híbrida definitiva para Pymes. Gestiona catálogos, automatiza ventas y construye confianza con tus clientes en una sola app.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <a href="#cta-final" class="group bg-primary text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-indigo-700 transition-all duration-300 shadow-lg hover:shadow-indigo-500/50 hover:-translate-y-1 flex items-center justify-center gap-2 overflow-hidden relative">
-                            <!-- Efecto de brillo en el botón -->
-                            <span class="absolute top-0 left-0 w-full h-full bg-white opacity-0 group-hover:animate-[ping_0.5s_ease-in-out]"></span>
-                            <i data-lucide="download" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
-                            Call To Action Principal
+                        <a href="#cta-final" class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-primary/90 transition-all duration-300 shadow-xl shadow-primary/20 hover:-translate-y-1 flex items-center justify-center gap-3">
+                            Comenzar ahora
+                            <i data-lucide="arrow-right" class="w-5 h-5"></i>
                         </a>
-                        <p class="text-sm text-gray-500 mt-3 sm:mt-0 sm:self-center">
-                            👉 Añadan un reductor de riesgo aquí.
-                        </p>
+                        <a href="#solucion" class="bg-slate-800 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-slate-700 transition-all duration-300 border border-slate-700 flex items-center justify-center gap-3">
+                            Ver funciones
+                        </a>
+                    </div>
+                    <div class="mt-8 flex items-center justify-center lg:justify-start gap-4 text-sm text-slate-500 font-medium">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 rounded-full border-2 border-darker bg-slate-700"></div>
+                            <div class="w-8 h-8 rounded-full border-2 border-darker bg-slate-600"></div>
+                            <div class="w-8 h-8 rounded-full border-2 border-darker bg-slate-500"></div>
+                        </div>
+                        <span>+500 negocios ya se unieron a la beta</span>
                     </div>
                 </div>
-                <div class="relative mx-auto w-full max-w-md lg:max-w-none animate-on-scroll delay-200">
-                    <!-- Decoraciones abstractas animadas -->
-                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-secondary/20 rounded-full blur-3xl animate-pulse-slow"></div>
-                    <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 1s;"></div>
-                    
-                    <!-- Placeholder para Mockup de App -->
-                    <div class="aspect-[9/19] bg-gray-200 rounded-[3rem] shadow-2xl border-[7px] border-gray-800 relative overflow-hidden group hover:border-primary transition-colors duration-500">
-                        <div class="absolute top-2 left-1/2 transform -translate-x-1/2 w-16 h-6 bg-black rounded-full z-10 group-hover:w-24 group-hover:h-8 transition-all duration-300"></div>
-                        <img src="image_highres.jpeg" alt="Mockup de la app" class="w-full h-full object-contain object-top rounded-b-[3rem] transform group-hover:scale-105 transition-transform duration-500">
+                
+                <div class="relative animate-on-scroll delay-200">
+                    <div class="relative z-10 mx-auto w-full max-w-[320px] lg:max-w-[360px] animate-float">
+                        <!-- Mockup Frame -->
+                        <div class="aspect-[9/19] bg-darker rounded-[3rem] shadow-2xl border-[8px] border-slate-800 relative overflow-hidden ring-1 ring-slate-700">
+                            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-7 bg-slate-800 rounded-b-2xl z-20"></div>
+                            <img src="image_highres.jpeg" alt="App Preview" class="w-full h-full object-cover object-top opacity-90">
+                            <!-- Overlay gradient for better integration -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-darker/40 to-transparent pointer-events-none"></div>
+                        </div>
+                        
+                        <!-- Floating Cards -->
+                        <div class="absolute -right-12 top-1/4 bg-dark/90 backdrop-blur-md p-4 rounded-2xl border border-slate-700 shadow-2xl hidden md:block animate-pulse-slow">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center">
+                                    <i data-lucide="trending-up" class="w-5 h-5 text-secondary"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400">Ventas hoy</p>
+                                    <p class="text-sm font-bold text-white">+24%</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="absolute -left-12 bottom-1/4 bg-dark/90 backdrop-blur-md p-4 rounded-2xl border border-slate-700 shadow-2xl hidden md:block animate-pulse-slow" style="animation-delay: 1s">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                                    <i data-lucide="users" class="w-5 h-5 text-primary"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400">Nuevos clientes</p>
+                                    <p class="text-sm font-bold text-white">12 hoy</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <!-- Background Glow -->
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/20 rounded-full blur-[100px] -z-10"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECCIÓN 3: Agitación del Problema (Framework PAS) -->
-    <section id="problema" class="py-20 bg-dark text-white">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6 animate-on-scroll">Problemas que Resuelve InterMarket</h2>
-            <p class="text-xl text-gray-400 mb-10 animate-on-scroll delay-100">
-                La falta de plataformas accesibles dificulta el comercio local. InterMarket cambia eso.
-            </p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left mt-12">
-                <!-- Tarjetas con efecto hover (levantamiento y brillo) -->
-                <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700 hover:bg-gray-700 hover:-translate-y-2 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 animate-on-scroll">
-                    <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center text-red-400 mb-4">
-                        <i data-lucide="x-circle" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Falta de Plataformas Accesibles</h3>
-                    <p class="text-gray-400">Muchas personas desean vender productos pero no cuentan con plataformas sencillas para ofrecer sus artículos, recurriendo a métodos informales que generan desorganización.</p>
-                </div>
-                <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700 hover:bg-gray-700 hover:-translate-y-2 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 animate-on-scroll delay-100">
-                    <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center text-red-400 mb-4">
-                        <i data-lucide="trending-down" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Comunicación Limitada</h3>
-                    <p class="text-gray-400">La comunicación entre compradores y vendedores es limitada, lo que ocasiona pérdidas de oportunidades para el negocio y dificultades para encontrar productos específicos.</p>
-                </div>
-                <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700 hover:bg-gray-700 hover:-translate-y-2 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 animate-on-scroll delay-200">
-                    <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center text-red-400 mb-4">
-                        <i data-lucide="frown" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Compra y Venta Presencial</h3>
-                    <p class="text-gray-400">En muchos locales, la compra y venta se realiza únicamente de forma presencial, generando pérdida de tiempo y falta de información sobre productos disponibles.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECCIÓN 4: Solución y Beneficios Principales -->
-    <section id="solucion" class="py-24 bg-white overflow-hidden">
+    <!-- SECCIÓN 3: El Problema -->
+    <section id="problema" class="py-24 bg-dark relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16 animate-on-scroll">
-                <h2 class="text-primary font-semibold tracking-wide uppercase text-sm mb-2">La Solución</h2>
-                <h3 class="text-3xl md:text-4xl font-bold text-dark mb-4">Presenten su App como el salvavidas.</h3>
-                <p class="text-lg text-gray-600">Regla de oro chicos: No nos listen características técnicas aburridas. Tradúzcanlas a BENEFICIOS reales para la vida de las personas.</p>
+                <h2 class="text-primary font-bold tracking-widest uppercase text-xs mb-4">El Desafío</h2>
+                <h3 class="text-3xl md:text-5xl font-extrabold text-white mb-6">¿Por qué el comercio local se queda atrás?</h3>
+                <p class="text-lg text-slate-400">Las Pymes enfrentan barreras tecnológicas que limitan su crecimiento. InterMarket nace para eliminar esos obstáculos.</p>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                <div class="order-2 md:order-1 animate-on-scroll">
-                    <h4 class="text-2xl font-bold mb-4">InterMarket: Tu Plataforma de Comercio Electrónico</h4>
-                    <p class="text-gray-600 mb-6">InterMarket es una aplicación híbrida que conecta a compradores y vendedores locales, facilitando la gestión de catálogos de productos de Pymes, comparación de stock y elección correcta de artículos. Utiliza React Native para multiplataforma y Supabase para una base de datos robusta.</p>
-                    <ul class="space-y-4">
-                        <li class="flex items-center gap-3 text-gray-700 p-2 hover:bg-gray-50 rounded-lg transition-colors">
-                            <div class="bg-green-100 p-1 rounded-full"><i data-lucide="check" class="text-secondary w-4 h-4"></i></div>
-                            Registro y autenticación segura de usuarios
-                        </li>
-                        <li class="flex items-center gap-3 text-gray-700 p-2 hover:bg-gray-50 rounded-lg transition-colors">
-                            <div class="bg-green-100 p-1 rounded-full"><i data-lucide="check" class="text-secondary w-4 h-4"></i></div>
-                            Gestión de catálogos con fotos, descripciones y precios
-                        </li>
-                        <li class="flex items-center gap-3 text-gray-700 p-2 hover:bg-gray-50 rounded-lg transition-colors">
-                            <div class="bg-green-100 p-1 rounded-full"><i data-lucide="check" class="text-secondary w-4 h-4"></i></div>
-                            Búsqueda y comparación de productos con filtros
-                        </li>
-                        <li class="flex items-center gap-3 text-gray-700 p-2 hover:bg-gray-50 rounded-lg transition-colors">
-                            <div class="bg-green-100 p-1 rounded-full"><i data-lucide="check" class="text-secondary w-4 h-4"></i></div>
-                            Chat directo y pagos en línea seguros
-                        </li>
-                    </ul>
-                </div>
-                <!-- Interacción de imagen al hacer hover -->
-                <div class="order-1 md:order-2 bg-indigo-50 rounded-2xl aspect-video flex items-center justify-center border border-indigo-100 group overflow-hidden cursor-pointer animate-on-scroll delay-200">
-                    <div class="transform group-hover:scale-110 transition-transform duration-700">
-                        <i data-lucide="image" class="w-12 h-12 text-indigo-300 mx-auto mb-2"></i>
-                        <p class="text-indigo-400 font-medium text-center px-4">Pantallazo interactivo de esta función específica</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="card-gradient p-8 rounded-3xl animate-on-scroll">
+                    <div class="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center text-accent mb-6">
+                        <i data-lucide="shield-off" class="w-7 h-7"></i>
                     </div>
+                    <h4 class="text-xl font-bold text-white mb-4">Informalidad e Inseguridad</h4>
+                    <p class="text-slate-400 leading-relaxed text-sm">Ventas por redes sociales sin estructura, lo que genera desconfianza y falta de garantías para el comprador.</p>
+                </div>
+                
+                <div class="card-gradient p-8 rounded-3xl animate-on-scroll delay-100">
+                    <div class="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center text-accent mb-6">
+                        <i data-lucide="message-square-off" class="w-7 h-7"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-4">Comunicación Fragmentada</h4>
+                    <p class="text-slate-400 leading-relaxed text-sm">Mensajes perdidos entre múltiples plataformas, dificultando el cierre de ventas y la atención al cliente.</p>
+                </div>
+                
+                <div class="card-gradient p-8 rounded-3xl animate-on-scroll delay-200">
+                    <div class="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center text-accent mb-6">
+                        <i data-lucide="store" class="w-7 h-7"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-4">Limitación Geográfica</h4>
+                    <p class="text-slate-400 leading-relaxed text-sm">Dependencia total del tráfico físico, perdiendo la oportunidad de llegar a clientes digitales cercanos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 4: La Solución -->
+    <section id="solucion" class="py-24 bg-darker relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                <div class="animate-on-scroll">
+                    <h2 class="text-secondary font-bold tracking-widest uppercase text-xs mb-4">Nuestra Solución</h2>
+                    <h3 class="text-3xl md:text-5xl font-extrabold text-white mb-8">Una plataforma diseñada para el éxito de las Pymes.</h3>
+                    <div class="space-y-6">
+                        <div class="flex gap-5">
+                            <div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+                                <i data-lucide="layout-grid" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-white mb-2">Catálogos Inteligentes</h4>
+                                <p class="text-slate-400 text-sm">Organiza tus productos con etiquetas, precios dinámicos y fotos de alta resolución.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-5">
+                            <div class="flex-shrink-0 w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center text-secondary">
+                                <i data-lucide="zap" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-white mb-2">Ventas en Tiempo Real</h4>
+                                <p class="text-slate-400 text-sm">Gestiona pedidos, chatea con clientes y concreta ventas de forma instantánea.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-5">
+                            <div class="flex-shrink-0 w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center text-accent">
+                                <i data-lucide="bar-chart-3" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-white mb-2">Análisis de Mercado</h4>
+                                <p class="text-slate-400 text-sm">Entiende qué productos buscan tus clientes y mejora tu oferta basándote en datos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative animate-on-scroll delay-200">
+                    <div class="card-gradient p-2 rounded-[2.5rem] overflow-hidden">
+                        <div class="bg-slate-900/50 rounded-[2rem] p-8">
+                            <div class="flex items-center justify-between mb-8">
+                                <div class="flex gap-3">
+                                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-amber-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                                </div>
+                                <div class="px-3 py-1 bg-slate-800 rounded-lg text-[10px] font-mono text-slate-500">intermarket-dashboard.v1</div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="h-8 bg-slate-800 rounded-lg w-3/4 animate-pulse"></div>
+                                <div class="grid grid-cols-3 gap-4">
+                                    <div class="h-24 bg-primary/5 rounded-xl border border-primary/10"></div>
+                                    <div class="h-24 bg-secondary/5 rounded-xl border border-secondary/10"></div>
+                                    <div class="h-24 bg-accent/5 rounded-xl border border-accent/10"></div>
+                                </div>
+                                <div class="h-32 bg-slate-800 rounded-xl w-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Glow effect behind the dashboard -->
+                    <div class="absolute -inset-4 bg-primary/20 blur-3xl -z-10 rounded-full opacity-50"></div>
                 </div>
             </div>
         </div>
@@ -303,39 +419,43 @@
         </div>
     </section>
 
-    <!-- SECCIÓN 5: Cómo Funciona (Mental Model) -->
-    <section class="py-20 bg-gray-50 border-t border-gray-200">
+    <!-- SECCIÓN 5: Cómo Funciona -->
+    <section id="pasos" class="py-24 bg-dark relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl font-bold text-dark mb-12 animate-on-scroll">Demuestren que empezar es facilísimo</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-                <!-- Conector animado -->
-                <div class="hidden md:block absolute top-12 left-[15%] right-[15%] h-0.5 bg-gray-200 -z-10 overflow-hidden">
-                    <div class="w-full h-full bg-primary origin-left scale-x-0 transition-transform duration-1000 ease-out animate-on-scroll-line" id="progress-line"></div>
+            <h2 class="text-primary font-bold tracking-widest uppercase text-xs mb-4">El Proceso</h2>
+            <h3 class="text-3xl md:text-5xl font-extrabold text-white mb-16">Empieza en tres pasos simples</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+                <!-- Conector animado robusto -->
+                <div class="hidden md:block absolute top-12 left-[15%] right-[15%] h-px bg-slate-800 -z-10">
+                    <div class="w-full h-full bg-gradient-to-r from-primary to-secondary origin-left scale-x-0 transition-transform duration-1000 ease-out animate-on-scroll-line" id="progress-line"></div>
                 </div>
                 
                 <div class="flex flex-col items-center animate-on-scroll">
-                    <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg border border-gray-100 mb-6 relative hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
-                        <span class="absolute -top-2 -right-2 bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-sm">1</span>
-                        <i data-lucide="user-plus" class="w-10 h-10 text-primary group-hover:scale-110 transition-transform"></i>
+                    <div class="w-24 h-24 bg-darker border border-slate-800 rounded-3xl flex items-center justify-center shadow-2xl mb-8 relative group hover:border-primary/50 transition-all duration-500">
+                        <span class="absolute -top-3 -right-3 bg-primary text-white w-10 h-10 rounded-xl flex items-center justify-center font-black shadow-lg shadow-primary/20">01</span>
+                        <i data-lucide="user-plus" class="w-10 h-10 text-slate-400 group-hover:text-primary transition-colors"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">Regístrate</h3>
-                    <p class="text-gray-600 text-sm px-4">Crea tu cuenta como comprador o vendedor en segundos.</p>
+                    <h4 class="text-xl font-bold text-white mb-3">Crea tu Perfil</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed px-6">Regístrate como comprador o vendedor en menos de un minuto.</p>
                 </div>
+                
                 <div class="flex flex-col items-center animate-on-scroll delay-100">
-                    <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg border border-gray-100 mb-6 relative hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
-                        <span class="absolute -top-2 -right-2 bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-sm">2</span>
-                        <i data-lucide="settings" class="w-10 h-10 text-primary group-hover:rotate-90 transition-transform duration-500"></i>
+                    <div class="w-24 h-24 bg-darker border border-slate-800 rounded-3xl flex items-center justify-center shadow-2xl mb-8 relative group hover:border-secondary/50 transition-all duration-500">
+                        <span class="absolute -top-3 -right-3 bg-secondary text-white w-10 h-10 rounded-xl flex items-center justify-center font-black shadow-lg shadow-secondary/20">02</span>
+                        <i data-lucide="store" class="w-10 h-10 text-slate-400 group-hover:text-secondary transition-colors"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">Publica o Busca</h3>
-                    <p class="text-gray-600 text-sm px-4">Vendedores agregan productos; compradores exploran y comparan.</p>
+                    <h4 class="text-xl font-bold text-white mb-3">Publica o Explora</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed px-6">Sube tus productos o descubre las mejores ofertas de tu comunidad.</p>
                 </div>
+                
                 <div class="flex flex-col items-center animate-on-scroll delay-200">
-                    <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg border border-gray-100 mb-6 relative hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
-                        <span class="absolute -top-2 -right-2 bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-sm">3</span>
-                        <i data-lucide="rocket" class="w-10 h-10 text-primary group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform"></i>
+                    <div class="w-24 h-24 bg-darker border border-slate-800 rounded-3xl flex items-center justify-center shadow-2xl mb-8 relative group hover:border-accent/50 transition-all duration-500">
+                        <span class="absolute -top-3 -right-3 bg-accent text-white w-10 h-10 rounded-xl flex items-center justify-center font-black shadow-lg shadow-accent/20">03</span>
+                        <i data-lucide="shopping-bag" class="w-10 h-10 text-slate-400 group-hover:text-accent transition-colors"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">Conecta y Compra</h3>
-                    <p class="text-gray-600 text-sm px-4">Chatea, negocia y realiza pagos seguros directamente en la app.</p>
+                    <h4 class="text-xl font-bold text-white mb-3">Concreta la Venta</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed px-6">Chatea directamente, acuerda el pago y recibe tu producto de forma segura.</p>
                 </div>
             </div>
         </div>
@@ -344,8 +464,8 @@
     <!-- SECCIÓN 6: Prueba Social (Trust) -->
     <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl font-bold text-dark mb-4 animate-on-scroll">Generen confianza real (Prueba Social)</h2>
-            <p class="text-gray-600 mb-12 max-w-2xl mx-auto animate-on-scroll delay-100">Como estamos con un MVP, usen testimonios de sus primeros beta testers o un manifiesto personal.</p>
+            <h2 class="text-3xl font-bold text-dark mb-4 animate-on-scroll">Construimos confianza desde el primer contacto</h2>
+            <p class="text-gray-600 mb-12 max-w-2xl mx-auto animate-on-scroll delay-100">InterMarket prioriza transparencia, buena comunicación y una experiencia de compra organizada para todos.</p>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Testimonio con efecto de elevación suave -->
@@ -353,14 +473,14 @@
                     <div class="flex text-yellow-400 mb-4">
                         <i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i>
                     </div>
-                    <p class="text-gray-700 italic mb-6">"El formato ideal que deben buscar: El problema que tenían + Cómo su app lo solucionó + El resultado medible que lograron."</p>
+                    <p class="text-gray-700 italic mb-6">"Antes vendía por redes sociales y todo era desordenado. Con InterMarket organicé mis productos, recibí consultas más claras y cerré más ventas."</p>
                     <div class="flex items-center gap-4">
                         <div class="w-12 h-12 bg-gray-300 rounded-full overflow-hidden">
                             <!-- Placeholder avatar -->
                         </div>
                         <div>
-                            <p class="font-bold text-dark">Nombre Ficticio</p>
-                            <p class="text-sm text-gray-500">Usuario Beta</p>
+                            <p class="font-bold text-dark">Emprendedora local</p>
+                            <p class="text-sm text-gray-500">Vendedora beta</p>
                         </div>
                     </div>
                 </div>
@@ -369,20 +489,20 @@
     </section>
 
     <!-- SECCIÓN 7: Casos de Uso / Audiencia Objetivo -->
-    <section class="py-20 bg-indigo-50">
+    <section class="py-20 bg-[#F0FBFE]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 animate-on-scroll">
-                <h2 class="text-3xl font-bold text-dark">¿Para quién construyeron esto exactamente?</h2>
-                <p class="text-gray-600 mt-4">Un buen marketing también sabe decir "no".</p>
+                <h2 class="text-3xl font-bold text-dark">¿Para quién está hecho InterMarket?</h2>
+                <p class="text-gray-600 mt-4">Diseñado para comercio local con necesidades reales de organización y visibilidad.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                 <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-secondary hover:shadow-md transition-shadow animate-on-scroll">
-                    <h3 class="font-bold text-xl mb-2 flex items-center gap-2"><i data-lucide="check-circle-2" class="text-secondary"></i> Perfecto para...</h3>
-                    <p class="text-gray-600">Describan con detalle a su Buyer Persona (ej. Estudiantes que trabajan).</p>
+                    <h3 class="font-bold text-xl mb-2 flex items-center gap-2"><i data-lucide="check-circle-2" class="text-secondary"></i> Ideal para...</h3>
+                    <p class="text-gray-600">Pymes, vendedores independientes y compradores que buscan comparar opciones antes de decidir.</p>
                 </div>
                 <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-red-500 hover:shadow-md transition-shadow animate-on-scroll delay-100">
-                    <h3 class="font-bold text-xl mb-2 flex items-center gap-2"><i data-lucide="x-octagon" class="text-red-500"></i> NO es para...</h3>
-                    <p class="text-gray-600">Aumenten su credibilidad siendo honestos sobre a quién NO le sirve su app.</p>
+                    <h3 class="font-bold text-xl mb-2 flex items-center gap-2"><i data-lucide="x-octagon" class="text-red-500"></i> No es para...</h3>
+                    <p class="text-gray-600">Negocios que requieren contabilidad avanzada, logística propia integrada o procesos enterprise complejos.</p>
                 </div>
             </div>
         </div>
@@ -391,7 +511,7 @@
     <!-- SECCIÓN 8: Preguntas Frecuentes (Manejo de Objeciones) -->
     <section id="faq" class="py-20 bg-white">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center text-dark mb-12 animate-on-scroll">Despejen todas las dudas y objeciones</h2>
+            <h2 class="text-3xl font-bold text-center text-dark mb-12 animate-on-scroll">Preguntas frecuentes</h2>
             
             <div class="space-y-4">
                 <!-- FAQ con transiciones suaves en el acordeón -->
@@ -403,7 +523,7 @@
                         </span>
                     </summary>
                     <div class="text-gray-600 px-6 pb-6 pt-0 animate-[fadeIn_0.3s_ease-in-out]">
-                        💡 Usen esta respuesta para darles seguridad y explicarles cuál será su modelo de negocio futuro de forma transparente.
+                        Sí. La fase beta es gratuita para validar la experiencia con usuarios reales y mejorar el producto con retroalimentación.
                     </div>
                 </details>
                 <details class="group bg-gray-50 rounded-xl cursor-pointer shadow-sm hover:shadow-md transition-all duration-300 animate-on-scroll">
@@ -414,7 +534,7 @@
                         </span>
                     </summary>
                     <div class="text-gray-600 px-6 pb-6 pt-0 animate-[fadeIn_0.3s_ease-in-out]">
-                        💡 Las apps móviles suelen pedir permisos. Expliquen aquí por qué los necesitan y cómo van a proteger los datos.
+                        Solo se solicitan permisos necesarios para operar la app (por ejemplo, fotos para publicaciones). Los datos se gestionan con autenticación segura y control de acceso.
                     </div>
                 </details>
             </div>
@@ -422,13 +542,13 @@
     </section>
 
     <!-- SECCIÓN 9: Escasez / Urgencia -->
-    <section class="py-12 bg-orange-50 border-y border-orange-100">
+    <section class="py-12 bg-[#FBEFCD] border-y border-[#FBEFCD]">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center animate-on-scroll">
-            <div class="inline-flex items-center gap-2 bg-orange-100 text-orange-800 px-4 py-2 rounded-full font-medium mb-4 hover:bg-orange-200 transition-colors">
+            <div class="inline-flex items-center gap-2 bg-[#FFFBEE] text-[#DB4EB6] px-4 py-2 rounded-full font-medium mb-4 hover:bg-[#FBEFCD] transition-colors">
                 <i data-lucide="clock" class="w-5 h-5 animate-pulse"></i>
-                Creen un sentido de urgencia ético (FOMO)
+                Cupos beta limitados
             </div>
-            <p class="text-lg text-gray-700">Por ser un MVP, la exclusividad les juega a favor. Pueden decir algo como: "Acceso solo a los primeros 500 usuarios. Quedan 42 lugares".</p>
+            <p class="text-lg text-gray-700">Estamos habilitando el acceso por etapas para garantizar estabilidad y acompañamiento cercano a cada nuevo usuario.</p>
         </div>
     </section>
 
@@ -436,9 +556,9 @@
     <section id="equipo" class="py-20 bg-gray-50 border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="animate-on-scroll">
-                <h2 class="text-3xl font-bold text-dark mb-4">Conozcan al equipo detrás de la magia</h2>
+                <h2 class="text-3xl font-bold text-dark mb-4">Conoce al equipo fundador</h2>
                 <p class="text-gray-600 mb-12 max-w-3xl mx-auto">
-                    💡 Equipo: En el marketing puro, decir "proyecto escolar" baja las conversiones. El truco aquí es enmarcarlo como "El Equipo Fundador". Esto da un rostro humano a la app, genera confianza y, de paso, les sirve como un portafolio profesional brutal para reclutadores.
+                    Somos un equipo multidisciplinario enfocado en crear una experiencia de comercio local más accesible, clara y eficiente para compradores y vendedores.
                 </p>
             </div>
 
@@ -446,7 +566,7 @@
                 <!-- Miembro del equipo 1 -->
                 <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 animate-on-scroll delay-100">
                     <!-- Avatar -->
-                    <div class="w-24 h-24 bg-indigo-100 rounded-full mx-auto mb-6 flex items-center justify-center overflow-hidden border-4 border-white shadow-md relative group cursor-pointer">
+                    <div class="w-24 h-24 bg-[#A7E5F5] rounded-full mx-auto mb-6 flex items-center justify-center overflow-hidden border-4 border-white shadow-md relative group cursor-pointer">
                         <!-- En un caso real, cambiar este div por un <img> con la foto del estudiante -->
                         <i data-lucide="user" class="w-10 h-10 text-primary group-hover:scale-110 transition-transform"></i>
                     </div>
@@ -529,14 +649,19 @@
             <p class="text-xl text-indigo-100 mb-10">
                 Sé parte de la revolución del comercio electrónico local. Regístrate para acceder a la beta y contribuir con tus comentarios.
             </p>
-            <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-3 group">
-                <input type="email" placeholder="Tu mejor correo electrónico" class="flex-1 px-5 py-3 rounded-full text-gray-900 focus:outline-none focus:ring-4 focus:ring-indigo-300 transition-all shadow-lg" required>
-                <!-- Botón con efecto de levantamiento intenso -->
-                <button type="submit" class="bg-dark text-white px-8 py-3 rounded-full font-bold hover:bg-gray-800 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 whitespace-nowrap active:scale-95">
-                    Solicitar Acceso
-                </button>
-            </form>
-            <p class="text-sm text-indigo-200 mt-4 opacity-80"><i data-lucide="lock" class="w-4 h-4 inline mr-1"></i> Cero spam. Date de baja cuando quieras.</p>
+            <div id="beta-form-container">
+                <form id="beta-access-form" class="max-w-md mx-auto flex flex-col sm:flex-row gap-3 group">
+                    <input type="email" id="beta-email" placeholder="Tu mejor correo electrónico" class="flex-1 px-5 py-4 rounded-xl text-gray-900 focus:outline-none focus:ring-4 focus:ring-primary/50 transition-all shadow-lg border-none" required>
+                    <button type="submit" class="bg-white text-primary px-8 py-4 rounded-xl font-bold hover:bg-slate-100 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 whitespace-nowrap active:scale-95 flex items-center justify-center gap-2">
+                        <span>Solicitar Acceso</span>
+                        <i data-lucide="sparkles" class="w-5 h-5"></i>
+                    </button>
+                </form>
+                <p class="text-sm text-indigo-200 mt-6 opacity-80 flex items-center justify-center gap-2">
+                    <i data-lucide="lock" class="w-4 h-4"></i>
+                    Cero spam. Acceso inmediato a la plataforma funcional.
+                </p>
+            </div>
         </div>
     </section>
 
@@ -635,19 +760,37 @@
             observer.observe(el);
         });
 
-        // Funcionalidad del Chatbot con Gemini API
-        // IMPORTANTE: Reemplaza 'TU_API_KEY_DE_GEMINI_AQUI' con tu API key real de Google AI Studio
-        // Obtén tu API key en: https://makersuite.google.com/app/apikey
-        const API_KEY = 'AIzaSyAdaEQJmfetQYlt8cxIKoPSabVS7NKdkHo'; // ⚠️ NO uses esta key en producción - es inseguro
+        // Base de conocimiento ampliada y robusta
+        const knowledgeBase = {
+            registro: "En InterMarket, el registro es sencillo: puedes unirte como Comprador para explorar y adquirir productos, o como Vendedor para gestionar tu propio catálogo digital. Ambos perfiles cuentan con seguridad mediante Supabase Auth.",
+            catalogo: "Nuestro catálogo dinámico permite a los vendedores subir fotos de alta calidad, descripciones detalladas, precios competitivos y categorías para que los compradores encuentren lo que buscan en segundos.",
+            busqueda: "Utiliza nuestra barra de búsqueda con filtros avanzados: puedes filtrar por categoría, rango de precio, estado del producto (nuevo/usado) y hasta por la ubicación del vendedor.",
+            chat: "¡Sí! Tenemos un sistema de chat en tiempo real integrado. Puedes contactar directamente al vendedor desde la página del producto para negociar, preguntar detalles o coordinar la entrega.",
+            pagos: "Aceptamos múltiples métodos de pago: desde transferencias bancarias directas y billeteras electrónicas (como PayPal o locales), hasta pagos en efectivo contra entrega según el acuerdo con el vendedor.",
+            envios: "Los vendedores pueden configurar sus propias zonas de entrega. Como comprador, verás el estado de tu pedido: desde 'Pendiente' hasta 'Entregado', con notificaciones en cada paso.",
+            resenas: "La confianza es clave. Después de cada compra, puedes calificar al vendedor y dejar un comentario. Esto ayuda a mantener una comunidad segura y de alta calidad.",
+            notificaciones: "Nunca te pierdas una oferta. Recibirás alertas sobre nuevos mensajes en el chat, cambios en el estado de tus pedidos y promociones exclusivas de tus tiendas favoritas.",
+            tecnologia: "InterMarket está construido con tecnología de punta: React Native para la aplicación móvil (iOS y Android), Tailwind CSS para un diseño responsivo y Supabase como backend robusto para datos y archivos.",
+            filtros: "Puedes refinar tu búsqueda usando filtros por precio (mínimo y máximo), categorías específicas (electrónica, ropa, hogar, etc.) y popularidad de los productos.",
+            vendedores: "Cualquier persona o Pyme puede ser vendedor. Solo necesitas registrarte, completar tu perfil de tienda y empezar a subir tus productos. ¡Es gratis en esta fase beta!",
+            ubicacion: "La app utiliza geolocalización para mostrarte primero los productos que están más cerca de ti, facilitando entregas rápidas y reduciendo costos de envío.",
+            soporte: "Si tienes problemas, nuestro equipo de soporte está listo para ayudarte. Puedes escribirnos a través de la sección de contacto en la app o enviarnos un correo directamente.",
+            app_funcional: "¡Ya puedes probar nuestra versión funcional en https://intermarket-cpu.netlify.app/catalogo! Ahí verás el catálogo real en acción.",
+            equipo: "El equipo detrás de InterMarket lo integran Laura Marina Carrasco (Marketing), Santos Yosmar Ríos (Software & UI) y Joseth Alexander Manzanares (Base de Datos).",
+            seguridad: "Tus datos están protegidos. Usamos encriptación de extremo a extremo para el chat y protocolos seguros de Supabase para toda la información personal y de transacciones.",
+            default: "Soy el asistente inteligente de InterMarket. Puedo responder sobre: registro, catálogo, búsqueda, chat, pagos, envíos, reseñas, filtros, soporte, tecnología y más. ¿Qué te gustaría saber?"
+        };
 
         function toggleChat() {
             const modal = document.getElementById('chatbot-modal');
             const button = document.getElementById('chatbot-button');
             if (modal.classList.contains('hidden')) {
                 modal.classList.remove('hidden');
+                modal.classList.add('flex'); // Asegurar que sea flex al mostrar
                 button.style.display = 'none';
             } else {
                 modal.classList.add('hidden');
+                modal.classList.remove('flex');
                 button.style.display = 'block';
             }
         }
@@ -663,15 +806,12 @@
             // Mostrar indicador de escritura
             addTypingIndicator();
             
-            try {
-                const response = await getGeminiResponse(message);
+            // Simular un pequeño retraso para que parezca más natural
+            setTimeout(() => {
+                const response = getAssistantResponse(message);
                 removeTypingIndicator();
                 addMessage(response, 'bot');
-            } catch (error) {
-                removeTypingIndicator();
-                addMessage('Lo siento, hubo un error al procesar tu mensaje. Por favor, intenta de nuevo.', 'bot');
-                console.error('Error con Gemini API:', error);
-            }
+            }, 600);
         }
 
         function handleKeyPress(event) {
@@ -683,8 +823,14 @@
         function addMessage(text, sender) {
             const messagesContainer = document.getElementById('chat-messages');
             const messageDiv = document.createElement('div');
-            messageDiv.className = sender === 'user' ? 'bg-primary text-white p-3 rounded-lg shadow-sm mb-3 ml-auto max-w-xs' : 'bg-white p-3 rounded-lg shadow-sm mb-3 max-w-xs';
-            messageDiv.innerHTML = `<p class="text-sm">${text}</p>`;
+            
+            if (sender === 'user') {
+                messageDiv.className = 'bg-primary text-white p-3 rounded-2xl rounded-tr-none shadow-lg ml-auto max-w-[85%] border border-primary/20';
+            } else {
+                messageDiv.className = 'bg-slate-800 p-3 rounded-2xl rounded-tl-none border border-slate-700 max-w-[85%]';
+            }
+            
+            messageDiv.innerHTML = `<p class="text-xs leading-relaxed">${text}</p>`;
             messagesContainer.appendChild(messageDiv);
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
@@ -693,15 +839,12 @@
             const messagesContainer = document.getElementById('chat-messages');
             const typingDiv = document.createElement('div');
             typingDiv.id = 'typing-indicator';
-            typingDiv.className = 'bg-white p-3 rounded-lg shadow-sm mb-3 max-w-xs';
+            typingDiv.className = 'bg-slate-800/50 p-3 rounded-2xl rounded-tl-none border border-slate-700 max-w-[100px]';
             typingDiv.innerHTML = `
-                <div class="flex items-center gap-2">
-                    <div class="flex gap-1">
-                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
-                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
-                    </div>
-                    <span class="text-sm text-gray-500">Escribiendo...</span>
+                <div class="flex gap-1 justify-center">
+                    <div class="w-1.5 h-1.5 bg-slate-500 rounded-full animate-bounce"></div>
+                    <div class="w-1.5 h-1.5 bg-slate-500 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                    <div class="w-1.5 h-1.5 bg-slate-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
                 </div>
             `;
             messagesContainer.appendChild(typingDiv);
@@ -715,89 +858,85 @@
             }
         }
 
-        async function getGeminiResponse(message) {
-            console.log('API Key:', API_KEY);
-            if (!API_KEY || API_KEY === 'AIzaSyAdaEQJmfetQYlt8cxIKoPSabVS7NKdkHo') {
-                return 'Lo siento, el chatbot no está configurado correctamente. Por favor, contacta al administrador.';
-            }
-
-            const prompt = `Eres un asistente de InterMarket, una aplicación de comercio electrónico para Pymes locales desarrollada por estudiantes de Ingeniería en Sistemas de Información de la UNA Nicaragua. 
-
-La app permite:
-- Registro y autenticación de usuarios (compradores y vendedores)
-- Gestión de catálogos de productos con fotos, descripciones y precios
-- Búsqueda y comparación de productos con filtros
-- Chat directo entre compradores y vendedores
-- Pagos seguros en línea
-- Desarrollada con React Native y Supabase
-
-Responde de manera amable, útil y en español. Mantén las respuestas concisas pero informativas. Si la pregunta no está relacionada con InterMarket, redirígela amablemente hacia temas de la app.
-
-Pregunta del usuario: ${message}`;
-
-            console.log('Enviando prompt a Gemini:', prompt);
-            
-            try {
-                // Usar REST API en lugar del SDK para evitar problemas de CORS
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        contents: [{
-                            parts: [{
-                                text: prompt
-                            }]
-                        }]
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const data = await response.json();
-                console.log('Respuesta de Gemini API:', data);
-                
-                if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0]) {
-                    return data.candidates[0].content.parts[0].text;
-                } else {
-                    throw new Error('Respuesta inesperada de la API');
-                }
-            } catch (error) {
-                console.error('Error calling Gemini API:', error);
-                // Fallback a respuestas predefinidas si la API falla
-                return getFallbackResponse(message);
-            }
-        }
-
-        function getFallbackResponse(message) {
+        function getAssistantResponse(message) {
             const lowerMessage = message.toLowerCase();
             
-            // Base de conocimientos del chatbot
-            const responses = {
-                registro: "Para registrarte en InterMarket, descarga la app desde la Play Store o App Store, selecciona si eres comprador o vendedor, y crea tu cuenta con tu email y contraseña. ¡Es gratis!",
-                productos: "Como vendedor, puedes agregar productos con fotos, descripciones, precios y categorías. Los compradores pueden buscar, filtrar y comparar productos de diferentes vendedores locales.",
-                busqueda: "Nuestra app tiene un potente sistema de búsqueda con filtros por categoría, precio, ubicación y más. Puedes buscar productos específicos o explorar por categorías.",
-                pagos: "Aceptamos pagos seguros a través de tarjetas de crédito, débito y transferencias bancarias. Todas las transacciones están protegidas con encriptación SSL.",
-                seguridad: "Tu seguridad es nuestra prioridad. Usamos encriptación de datos, autenticación segura y cumplimos con las normativas de protección de datos. Nunca compartimos tu información personal.",
-                chat: "Dentro de la app, puedes chatear directamente con vendedores para hacer preguntas sobre productos, negociar precios o coordinar entregas.",
-                local: "InterMarket está diseñado específicamente para el comercio local entre Pymes. Conecta compradores y vendedores de tu comunidad para transacciones más rápidas y seguras.",
-                gratis: "La versión beta es completamente gratuita. En el futuro, planeamos un modelo freemium con funciones premium para vendedores.",
-                app: "InterMarket es una app híbrida desarrollada con React Native, disponible para iOS y Android. También tenemos una versión web en desarrollo.",
-                equipo: "Somos estudiantes de Ingeniería en Sistemas de Información de la UNA Nicaragua, apasionados por crear soluciones tecnológicas para el comercio local.",
-                default: "Lo siento, no entendí tu pregunta. Puedes preguntarme sobre registro, productos, búsqueda, pagos, seguridad, chat, comercio local, o cualquier otra función de InterMarket."
-            };
-            
-            // Buscar coincidencias por palabras clave
-            for (const [key, response] of Object.entries(responses)) {
-                if (lowerMessage.includes(key)) {
-                    return response;
+            const intents = [
+                { keys: ['registro', 'iniciar sesión', 'login', 'cuenta', 'perfil', 'registrarme'], answer: knowledgeBase.registro },
+                { keys: ['catálogo', 'catalogo', 'producto', 'publicar', 'vender', 'artículos'], answer: knowledgeBase.catalogo },
+                { keys: ['buscar', 'búsqueda', 'encontrar', 'comparar'], answer: knowledgeBase.busqueda },
+                { keys: ['chat', 'mensaje', 'mensajes', 'comunicación', 'hablar', 'contactar'], answer: knowledgeBase.chat },
+                { keys: ['pago', 'pagos', 'dinero', 'transferencia', 'efectivo', 'tarjeta'], answer: knowledgeBase.pagos },
+                { keys: ['envío', 'envios', 'entrega', 'pedido', 'rastreo'], answer: knowledgeBase.envios },
+                { keys: ['reseña', 'reseñas', 'calificación', 'opinión', 'estrellas'], answer: knowledgeBase.resenas },
+                { keys: ['notificación', 'notificaciones', 'alerta', 'aviso'], answer: knowledgeBase.notificaciones },
+                { keys: ['tecnología', 'stack', 'react', 'supabase', 'desarrollo', 'programación'], answer: knowledgeBase.tecnologia },
+                { keys: ['filtro', 'filtros', 'refinar', 'precio'], answer: knowledgeBase.filtros },
+                { keys: ['vendedores', 'pyme', 'negocio', 'tienda', 'vender'], answer: knowledgeBase.vendedores },
+                { keys: ['ubicación', 'donde', 'cerca', 'distancia', 'mapa'], answer: knowledgeBase.ubicacion },
+                { keys: ['soporte', 'ayuda', 'problema', 'error', 'contacto'], answer: knowledgeBase.soporte },
+                { keys: ['funcional', 'demo', 'prueba', 'enlace', 'link', 'netlify'], answer: knowledgeBase.app_funcional },
+                { keys: ['equipo', 'fundadores', 'laura', 'santos', 'joseth', 'quien'], answer: knowledgeBase.equipo },
+                { keys: ['seguridad', 'protección', 'privacidad', 'datos', 'seguro'], answer: knowledgeBase.seguridad }
+            ];
+
+            for (const intent of intents) {
+                if (intent.keys.some((key) => lowerMessage.includes(key))) {
+                    return intent.answer;
                 }
             }
             
-            return responses.default;
+            return knowledgeBase.default;
+        }
+
+        document.querySelectorAll('.chat-suggestion').forEach((button) => {
+            button.addEventListener('click', () => {
+                const question = button.dataset.question;
+                if (!question) return;
+                document.getElementById('chat-input').value = question;
+                sendMessage();
+            });
+        });
+
+        // Manejo del Formulario de Acceso Beta
+        const betaForm = document.getElementById('beta-access-form');
+        const formContainer = document.getElementById('beta-form-container');
+
+        if (betaForm) {
+            betaForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = document.getElementById('beta-email').value;
+                const button = betaForm.querySelector('button');
+                const originalButtonContent = button.innerHTML;
+
+                // Estado de carga
+                button.disabled = true;
+                button.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <div class="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+                        <span>Procesando...</span>
+                    </div>
+                `;
+
+                // Simular registro (aquí se conectaría con Supabase/Backend en el futuro)
+                await new Promise(resolve => setTimeout(resolve, 1500));
+
+                // Mostrar éxito y proporcionar acceso
+                formContainer.innerHTML = `
+                    <div class="animate-[fadeIn_0.5s_ease-out] bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20">
+                        <div class="w-16 h-16 bg-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-emerald-500/20">
+                            <i data-lucide="check" class="text-white w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">¡Bienvenido a la Beta!</h3>
+                        <p class="text-indigo-100 mb-8">Hemos registrado a <span class="font-bold underline">${email}</span>. Ya puedes explorar el catálogo funcional.</p>
+                        <a href="https://intermarket-cpu.netlify.app/catalogo" target="_blank" class="inline-flex items-center gap-2 bg-emerald-500 text-white px-8 py-4 rounded-xl font-bold hover:bg-emerald-600 hover:-translate-y-1 transition-all shadow-xl shadow-emerald-500/20">
+                            Entrar al Catálogo
+                            <i data-lucide="external-link" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                `;
+                lucide.createIcons();
+            });
         }
     </script>
 </body>
